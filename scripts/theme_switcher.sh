@@ -8,7 +8,6 @@ if [ -z "$wall" ]; then
   exit 1
 fi
 
-# ensure cache directory
 mkdir -p "$HOME/.cache/theme"
 
 # set wallpaper
@@ -18,15 +17,22 @@ if ! pgrep -x swww-daemon >/dev/null; then
 fi
 swww img "$wall"
 
-# generate color palette using local LLM via Ollama
-# expected output: JSON with background, foreground and accent keys
-palette=$(ollama run walpal "$wall") || {
-  echo "ollama failed" >&2
-  exit 1
-}
+THEME="$HOME/.config/themes/colors.json"
+PRESET_DIR="$(dirname "$0")/../themes"
 
-echo "$palette" > "$HOME/.config/themes/colors.json"
+if command -v ollama >/dev/null; then
+  palette=$(ollama run walpal "$wall" 2>/dev/null) || palette=""
+  if [ -n "$palette" ]; then
+    echo "$palette" > "$THEME"
+  else
+    echo "ollama failed, using preset theme" >&2
+    cp "$PRESET_DIR/dark/colors.json" "$THEME"
+  fi
+else
+  echo "ollama not found, using preset theme" >&2
+  cp "$PRESET_DIR/dark/colors.json" "$THEME"
+fi
 
-"$(dirname "$0")/apply_colors.sh" "$HOME/.config/themes/colors.json"
+"$(dirname "$0")/apply_colors.sh" "$THEME"
 
 notify-send "Theme updated" "$(basename "$wall")"

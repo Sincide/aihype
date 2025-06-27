@@ -60,6 +60,8 @@ Print | Screenshot using grim + slurp
 
 Brightness and volume keys are handled via `brightnessctl` and `playerctl`.
 
+See [docs/KEYBINDINGS.md](docs/KEYBINDINGS.md) for the complete list.
+
 ## Troubleshooting
 
 - Ensure `swww` and `ollama` are installed for wallpaper and color extraction.

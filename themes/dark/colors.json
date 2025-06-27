@@ -1,5 +1,13 @@
 {
   "background": "#1d1f21",
   "foreground": "#c5c8c6",
-  "accent": "#81a2be"
+  "accent": "#81a2be",
+  "color0": "#282a2e",
+  "color1": "#a54242",
+  "color2": "#8c9440",
+  "color3": "#de935f",
+  "color4": "#5f819d",
+  "color5": "#85678f",
+  "color6": "#5e8d87",
+  "color7": "#707880"
 }
