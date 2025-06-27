@@ -1,11 +1,9 @@
 # Fish configuration
-set -g theme_file ~/.cache/theme/colors.env
-if test -f $theme_file
-    source $theme_file
+set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME $HOME/.config
+set -g theme_file "$XDG_CONFIG_HOME/theme/colors.env"
+if test -f "$theme_file"
+    source "$theme_file"
 end
-
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
 
 # No greeting banner
 set fish_greeting
@@ -13,27 +11,7 @@ set fish_greeting
 # Common environment
 set -gx EDITOR nvim
 
-function fish_prompt
-    set_color $accent
-    echo -n (prompt_pwd)
-    if git rev-parse --is-inside-work-tree ^/dev/null
-        set branch (git symbolic-ref --short HEAD ^/dev/null)
-        if test -n "$branch"
-            echo -n " ($branch)"
-        end
-    end
-    echo -n '>'
-    set_color normal
-end
-
-# Ensure scripts from this repo are in PATH
-set -gx PATH $PATH $HOME/.local/bin
-
-# Convenience functions
-function theme-toggle
-    toggle_theme.sh
-end
-
-function wall-random
-    random_wallpaper.sh
+# Ensure scripts from this repo are in PATH only once
+if not contains $HOME/.local/bin $PATH
+    set -gx PATH $HOME/.local/bin $PATH
 end

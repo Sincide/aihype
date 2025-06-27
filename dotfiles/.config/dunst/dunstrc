@@ -1,8 +1,6 @@
 [global]
-    # Colors are filled in by apply_colors.sh at login
-    frame_color = "${accent}"
-    background = "${background}"
-    foreground = "${foreground}"
+    # Colors are loaded from ~/.cache/theme/dunst.conf
+    include ~/.cache/theme/dunst.conf
 
     font = Monospace 10
     width = 300

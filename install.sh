@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-# Install packages
+# Install packages (Arch Linux only)
 PACKAGES=(hyprland waybar kitty fish fuzzel dunst swww jq ollama brightnessctl playerctl grim slurp cliphist pamixer fzf)
+
+if [ "$(uname -s)" != "Linux" ] || [ ! -f /etc/arch-release ]; then
+  echo "This install script only supports Arch Linux." >&2
+  exit 1
+fi
 
 if command -v paru >/dev/null; then
   paru -S --needed --noconfirm "${PACKAGES[@]}"
@@ -11,18 +16,20 @@ else
 fi
 
 # Create config directories
-mkdir -p "$HOME/.config"
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+mkdir -p "$XDG_CONFIG_HOME"
 
 # Symlink dotfiles (requires GNU stow)
 if command -v stow >/dev/null; then
   stow -t "$HOME" dotfiles
 else
-  echo "Install 'stow' to manage symlinks" >&2
+  echo "stow not found, copying files" >&2
+  cp -r dotfiles/.config/* "$XDG_CONFIG_HOME"/
 fi
 
 # Copy initial theme
-mkdir -p "$HOME/.config/themes"
-cp -n themes/dark/colors.json "$HOME/.config/themes/colors.json"
+mkdir -p "$XDG_CONFIG_HOME/themes"
+cp -n themes/dark/colors.json "$XDG_CONFIG_HOME/themes/colors.json"
 
 # Install helper scripts to ~/.local/bin
 mkdir -p "$HOME/.local/bin"
@@ -31,7 +38,7 @@ for s in scripts/*.sh; do
 done
 
 # Apply default colors
-scripts/apply_colors.sh "$HOME/.config/themes/colors.json"
+scripts/apply_colors.sh "$XDG_CONFIG_HOME/themes/colors.json"
 
 # Initial theme setup
-scripts/theme_switcher.sh "$HOME/.config/wallpapers/default.jpg" || true
+scripts/theme_switcher.sh "$XDG_CONFIG_HOME/wallpapers/default.jpg" || true

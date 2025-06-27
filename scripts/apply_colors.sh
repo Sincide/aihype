@@ -25,6 +25,12 @@ jq -r '. as $c | "foreground \($c.foreground)\nbackground \($c.background)" +
 # Env file for shells
 jq -r 'to_entries|map("export " + (.key | ascii_upcase) + "=" + .value) | .[]' "$THEME_JSON" > "$CACHE_DIR/colors.env"
 
+# Dunst theme
+jq -r '. as $c | "[global]\nframe_color=\($c.accent)\nbackground=\($c.background)\nforeground=\($c.foreground)"' "$THEME_JSON" > "$CACHE_DIR/dunst.conf"
+
+ln -sf "$CACHE_DIR/dunst.conf" "$HOME/.config/dunst/theme.conf"
+
 # Reload components that support live theming
 hyprctl reload >/dev/null 2>&1 || true
 killall -SIGUSR2 waybar 2>/dev/null || true
+killall -SIGUSR1 dunst 2>/dev/null || true
