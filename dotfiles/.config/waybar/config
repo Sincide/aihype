@@ -1,12 +1,94 @@
-{
-  "layer": "top",
-  "height": 30,
-  "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["clock"],
-  "modules-right": ["cpu", "memory", "disk", "network", "pulseaudio", "battery", "tray"],
-  "clock": {"format": "%a %d %b %H:%M"},
-  "cpu": {"format": "CPU {usage}%"},
-  "memory": {"format": "RAM {used:0.1f}G"},
-  "disk": {"format": "SSD {percentage_used}%"},
-  "network": {"format": "{ifname} {ipaddr}"}
-}
+[
+  {
+    "name": "top",
+    "layer": "top",
+    "position": "top",
+    "height": 28,
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["custom/active_window", "custom/wm_mode"],
+    "modules-right": ["custom/audio_visualizer", "custom/calendar", "tray", "custom/ai_chat"]
+  },
+  {
+    "name": "bottom",
+    "layer": "top",
+    "position": "bottom",
+    "height": 28,
+    "modules-left": ["custom/cpu_chart", "custom/gpu_stats", "custom/memory_chart"],
+    "modules-center": ["custom/process_hogs", "custom/net_stats"],
+    "modules-right": ["custom/battery", "custom/vpn", "custom/tmux", "custom/game_mode", "custom/pomodoro", "custom/background_tasks", "custom/error_log"]
+  },
+
+  "custom/active_window": {
+    "exec": "~/.config/waybar/scripts/active_window.sh",
+    "interval": 1
+  },
+  "custom/wm_mode": {
+    "exec": "~/.config/waybar/scripts/wm_mode.sh",
+    "interval": 2
+  },
+  "custom/audio_visualizer": {
+    "exec": "~/.config/waybar/scripts/audio_visualizer.sh",
+    "interval": 1
+  },
+  "custom/calendar": {
+    "exec": "~/.config/waybar/scripts/calendar_agenda.sh",
+    "on-click": "~/.config/waybar/scripts/calendar_agenda.sh click",
+    "interval": 60
+  },
+  "custom/ai_chat": {
+    "exec": "echo AI",
+    "on-click": "~/.config/waybar/scripts/ai_chat.sh"
+  },
+  "custom/cpu_chart": {
+    "exec": "~/.config/waybar/scripts/cpu_chart.sh",
+    "interval": 2
+  },
+  "custom/gpu_stats": {
+    "exec": "~/.config/waybar/scripts/gpu_stats.sh",
+    "interval": 5
+  },
+  "custom/memory_chart": {
+    "exec": "~/.config/waybar/scripts/memory_chart.sh",
+    "interval": 5
+  },
+  "custom/process_hogs": {
+    "exec": "~/.config/waybar/scripts/process_hogs.sh",
+    "interval": 5
+  },
+  "custom/net_stats": {
+    "exec": "~/.config/waybar/scripts/net_stats.sh",
+    "interval": 2,
+    "on-click": "kitty -e traceroute 8.8.8.8"
+  },
+  "custom/battery": {
+    "exec": "~/.config/waybar/scripts/battery_health.sh",
+    "interval": 60
+  },
+  "custom/vpn": {
+    "exec": "~/.config/waybar/scripts/vpn_toggle.sh",
+    "on-click": "~/.config/waybar/scripts/vpn_toggle.sh toggle",
+    "interval": 10
+  },
+  "custom/tmux": {
+    "exec": "~/.config/waybar/scripts/tmux_tracker.sh",
+    "interval": 5
+  },
+  "custom/game_mode": {
+    "exec": "~/.config/waybar/scripts/game_mode.sh",
+    "on-click": "~/.config/waybar/scripts/game_mode.sh toggle",
+    "interval": 2
+  },
+  "custom/pomodoro": {
+    "exec": "~/.config/waybar/scripts/pomodoro_timer.sh",
+    "on-click": "~/.config/waybar/scripts/pomodoro_timer.sh toggle",
+    "interval": 1
+  },
+  "custom/background_tasks": {
+    "exec": "~/.config/waybar/scripts/background_tasks.sh",
+    "interval": 5
+  },
+  "custom/error_log": {
+    "exec": "~/.config/waybar/scripts/error_log.sh",
+    "interval": 30
+  }
+]
