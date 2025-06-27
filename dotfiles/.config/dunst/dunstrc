@@ -1,0 +1,5 @@
+[global]
+    frame_color = "${accent}"
+    background = "${background}"
+    foreground = "${foreground}"
+    font = Monospace 10

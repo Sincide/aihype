@@ -1,0 +1,4 @@
+[colors]
+background=@background
+text=@foreground
+match=@accent
