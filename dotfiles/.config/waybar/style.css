@@ -1,25 +1,46 @@
 @import url("colors.css");
-
-/* Generated colors.css is symlinked to ~/.cache/theme/colors.css */
-
+/* Futuristic dual bar theme */
 * {
     font-family: monospace;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 window#waybar {
-    background: @background;
+    background: rgba(20,20,20,0.8);
     color: @foreground;
+}
+
+window#waybar.top {
+    border-bottom: 1px solid @accent;
+}
+
+window#waybar.bottom {
+    border-top: 1px solid @accent;
 }
 
 #workspaces button.focused {
     background: @accent;
+    color: @background;
 }
 
-#cpu, #memory, #disk, #network, #tray {
+#tray menu {
+    background: rgba(40,40,40,0.9);
+}
+
+.module {
     padding: 0 8px;
+    transition: background 0.3s;
 }
 
-#clock {
-    padding: 0 12px;
+.module:hover {
+    background: rgba(60,60,60,0.5);
+}
+
+@keyframes alert {
+    from {background-color: @accent;}
+    to {background-color: transparent;}
+}
+
+.module.urgent {
+    animation: alert 1s infinite alternate;
 }

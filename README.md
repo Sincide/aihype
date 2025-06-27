@@ -68,3 +68,5 @@ See [docs/KEYBINDINGS.md](docs/KEYBINDINGS.md) for the complete list.
 - `fzf` is required for the wallpaper picker.
 - If colors do not update, remove `~/.cache/theme` and re-run `theme_switcher.sh`.
 
+
+For a feature-rich dual Waybar setup, see [docs/ADVANCED_WAYBAR.md](docs/ADVANCED_WAYBAR.md).
