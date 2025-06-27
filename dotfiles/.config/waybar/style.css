@@ -1,5 +1,7 @@
 @import url("colors.css");
 
+/* Generated colors.css is symlinked to ~/.cache/theme/colors.css */
+
 * {
     font-family: monospace;
     font-size: 14px;
@@ -14,7 +16,7 @@ window#waybar {
     background: @accent;
 }
 
-#cpu, #memory, #tray {
+#cpu, #memory, #disk, #network, #tray {
     padding: 0 8px;
 }
 

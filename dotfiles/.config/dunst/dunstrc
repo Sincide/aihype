@@ -1,5 +1,23 @@
 [global]
+    # Colors are filled in by apply_colors.sh at login
     frame_color = "${accent}"
     background = "${background}"
     foreground = "${foreground}"
+
     font = Monospace 10
+    width = 300
+    origin = top-right
+    offset = 10x40
+    transparency = 15
+    corner_radius = 6
+    markup = full
+
+[urgency_low]
+    timeout = 3
+
+[urgency_normal]
+    timeout = 6
+
+[urgency_critical]
+    timeout = 0
+    frame_color = "#ff5555"

@@ -15,7 +15,7 @@ The setup uses **Hyprland** as the compositor with supporting applications:
 Dynamic theming is powered by a local LLM via **Ollama**. Colors are extracted from the selected wallpaper and written to `themes/colors.json`. Generated fragments are placed in `~/.cache/theme/` and imported by the individual configs.
 
 Configuration files are stored in `dotfiles/.config` so they can be managed with `stow` or any dotfile manager. Scripts live under `scripts/` and themes under `themes/`.
-Additional utilities handle wallpaper management and theming.
+Additional utilities handle wallpaper management and theming. See [docs/DOTFILES.md](docs/DOTFILES.md) for a description of the provided configs.
 
 ## Installation
 

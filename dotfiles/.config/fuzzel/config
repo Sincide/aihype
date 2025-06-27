@@ -1,3 +1,10 @@
+[main]
+font=Iosevka:size=12
+lines=10
+width=40
+prompt=run: 
+terminal=kitty
+
 [colors]
 background=@background
 text=@foreground
