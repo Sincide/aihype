@@ -16,6 +16,7 @@ This guide explains how the pieces of the repository work together.
 3. **Wallpaper Management**
    - `wallpaper_picker.sh` provides an interactive picker with previews.
    - `random_wallpaper.sh` applies a random image from your wallpaper directory and generates a matching palette.
+   - Scripts look for images in `~/Pictures/wallpapers` by default. Pass a directory as an argument to use a different location.
 
 4. **Autostart**
    - When Hyprland launches it executes `autostart/start.sh` which starts required services, loads Waybar and reapplies the current theme.

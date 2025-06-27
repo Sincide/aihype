@@ -15,7 +15,14 @@ set -gx EDITOR nvim
 
 function fish_prompt
     set_color $accent
-    echo -n (prompt_pwd) '>'
+    echo -n (prompt_pwd)
+    if git rev-parse --is-inside-work-tree ^/dev/null
+        set branch (git symbolic-ref --short HEAD ^/dev/null)
+        if test -n "$branch"
+            echo -n " ($branch)"
+        end
+    end
+    echo -n '>'
     set_color normal
 end
 
