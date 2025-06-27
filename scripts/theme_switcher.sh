@@ -27,17 +27,6 @@ palette=$(ollama run walpal "$wall") || {
 
 echo "$palette" > "$HOME/.config/themes/colors.json"
 
-# create fragments from palette
-jq -r '. as $c | "$background = \($c.background)\n$foreground = \($c.foreground)\n$accent = \($c.accent)"' "$HOME/.config/themes/colors.json" > "$HOME/.cache/theme/colors.conf"
+"$(dirname "$0")/apply_colors.sh" "$HOME/.config/themes/colors.json"
 
-jq -r '. as $c | "@define-color background \($c.background);\n@define-color foreground \($c.foreground);\n@define-color accent \($c.accent);"' "$HOME/.config/themes/colors.json" > "$HOME/.cache/theme/colors.css"
-
-jq -r '. as $c | "foreground \($c.foreground)\nbackground \($c.background)\ncolor1 \($c.accent)"' "$HOME/.config/themes/colors.json" > "$HOME/.cache/theme/kitty.conf"
-
-# env file for fish or other shells
-jq -r 'to_entries|map("export " + .key | ascii_upcase + "=" + .value) | .[]' "$HOME/.config/themes/colors.json" > "$HOME/.cache/theme/colors.env"
-
-# reload components
-hyprctl reload
-killall -SIGUSR2 waybar 2>/dev/null
 notify-send "Theme updated" "$(basename "$wall")"

@@ -13,3 +13,11 @@ window#waybar {
 #workspaces button.focused {
     background: @accent;
 }
+
+#cpu, #memory, #tray {
+    padding: 0 8px;
+}
+
+#clock {
+    padding: 0 12px;
+}
