@@ -1,0 +1,15 @@
+@import url("colors.css");
+
+* {
+    font-family: monospace;
+    font-size: 14px;
+}
+
+window#waybar {
+    background: @background;
+    color: @foreground;
+}
+
+#workspaces button.focused {
+    background: @accent;
+}
