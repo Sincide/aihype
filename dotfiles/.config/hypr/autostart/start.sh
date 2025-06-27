@@ -11,6 +11,14 @@ if ! pgrep -x dunst >/dev/null; then
   dunst &
 fi
 
+# Network applet and authentication agent
+if command -v nm-applet >/dev/null && ! pgrep -f nm-applet >/dev/null; then
+  nm-applet &
+fi
+if command -v lxpolkit >/dev/null && ! pgrep -f lxpolkit >/dev/null; then
+  lxpolkit &
+fi
+
 # Clipboard history
 if ! pgrep -x wl-paste >/dev/null; then
   wl-paste --type text --watch cliphist store &

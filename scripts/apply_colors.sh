@@ -13,6 +13,9 @@ jq -r '. as $c | "$background = \($c.background)\n$foreground = \($c.foreground)
 # GTK/Waybar colors
 jq -r '. as $c | "@define-color background \($c.background);\n@define-color foreground \($c.foreground);\n@define-color accent \($c.accent);"' "$THEME_JSON" > "$CACHE_DIR/colors.css"
 
+# Keep Waybar config in sync
+ln -sf "$CACHE_DIR/colors.css" "$HOME/.config/waybar/colors.css"
+
 # Kitty colors
 jq -r '. as $c | "foreground \($c.foreground)\nbackground \($c.background)\ncolor1 \($c.accent)"' "$THEME_JSON" > "$CACHE_DIR/kitty.conf"
 
