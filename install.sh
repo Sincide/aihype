@@ -2,7 +2,7 @@
 set -e
 
 # Install packages
-PACKAGES=(hyprland waybar kitty fish fuzzel dunst swww jq ollama brightnessctl playerctl grim slurp cliphist pamixer)
+PACKAGES=(hyprland waybar kitty fish fuzzel dunst swww jq ollama brightnessctl playerctl grim slurp cliphist pamixer fzf)
 
 if command -v paru >/dev/null; then
   paru -S --needed --noconfirm "${PACKAGES[@]}"
