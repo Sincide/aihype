@@ -24,5 +24,14 @@ fi
 mkdir -p "$HOME/.config/themes"
 cp -n themes/dark/colors.json "$HOME/.config/themes/colors.json"
 
+# Install helper scripts to ~/.local/bin
+mkdir -p "$HOME/.local/bin"
+for s in scripts/*.sh; do
+  ln -sf "$(pwd)/$s" "$HOME/.local/bin/$(basename "$s")"
+done
+
+# Apply default colors
+scripts/apply_colors.sh "$HOME/.config/themes/colors.json"
+
 # Initial theme setup
 scripts/theme_switcher.sh "$HOME/.config/wallpapers/default.jpg" || true

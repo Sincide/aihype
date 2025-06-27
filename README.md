@@ -1,6 +1,6 @@
 # Arch Linux Modular Wayland Setup
 
-This repository contains a modular configuration for a minimal Wayland desktop on Arch Linux.
+This repository contains a modular configuration for a minimal Wayland desktop on Arch Linux.  It now includes helper scripts and presets for a fully automated theming workflow.
 
 ## Overview
 
@@ -17,12 +17,25 @@ Dynamic theming is powered by a local LLM via **Ollama**. Colors are extracted f
 Configuration files are stored in `dotfiles/.config` so they can be managed with `stow` or any dotfile manager. Scripts live under `scripts/` and themes under `themes/`.
 Additional utilities handle wallpaper management and theming.
 
+## Installation
+
+Clone the repository and run:
+
+```bash
+./install.sh
+```
+
+This installs required packages, symlinks all dotfiles and places the helper scripts in `~/.local/bin`.
+After installation the default dark theme is applied.
+
 ## Theme Generation Workflow
 
 1. Run `scripts/theme_switcher.sh /path/to/wallpaper.jpg`.
 2. The script sets the wallpaper using `swww` and calls `ollama` to generate a color palette.
 3. Color fragments for Hyprland, Waybar, Kitty, Dunst and Fuzzel are written to `~/.cache/theme/`.
 4. The components are reloaded so the new palette takes effect.
+
+Detailed steps and keybindings are described in [docs/WORKFLOW.md](docs/WORKFLOW.md).
 
 ## Wallpaper Selection
 
@@ -41,6 +54,8 @@ Super + Enter | Launch Kitty
 Super + D | Launch Fuzzel
 Super + Q | Close focused window
 Super + Shift + R | Reload Hyprland
+Super + T | Toggle preset theme
+Super + P | Wallpaper picker
 Print | Screenshot using grim + slurp
 
 Brightness and volume keys are handled via `brightnessctl` and `playerctl`.
